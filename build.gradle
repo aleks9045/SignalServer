@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+application {
+    mainClass = "Main"
+    applicationDefaultJvmArgs = ['-Dfile.encoding=UTF-8']
+}
+
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.java-websocket:Java-WebSocket:1.5.7'
+}
+
