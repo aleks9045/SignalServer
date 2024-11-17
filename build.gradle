@@ -1,7 +1,6 @@
 plugins {
     id 'java'
     id 'application'
-    id 'com.github.johnrengelman.shadow' version '7.0.0'
 }
 application {
     mainClass = "Main"
@@ -17,18 +16,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.java-websocket:Java-WebSocket:1.5.7'
 }
 
-// DevOps
 jar {
     manifest {
         attributes(
                 'Main-Class': 'Main'
         )
     }
-}
-
-shadowJar {
-    archiveBaseName.set('SignalServer')
 }

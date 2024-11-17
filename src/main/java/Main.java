@@ -1,10 +1,8 @@
-import java.net.InetSocketAddress;
+import SignalServer.Server;
 
 public class Main {
     public static void main(String[] args) {
-        int port = 8000; // Укажите нужный порт
-        SignalingServer server = new SignalingServer(new InetSocketAddress(port));
+        Server server = new Server(8000);
         server.start();
-        System.out.println("Signaling server running on port: " + port);
     }
 }
