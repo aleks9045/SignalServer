@@ -2,7 +2,6 @@ package SignalServer;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.function.Consumer;
 
@@ -12,14 +11,14 @@ public class ClientHandler extends Thread {
     private final HashMap<Byte, Consumer<byte[][]>> commands = new HashMap<>();
     CommandProcessor commandProcessor = new CommandProcessor();
     private byte[][] currentBlockchain = new byte[][]{{
-        10, 64, 50, 97, 99, 57, 97, 54,
+                10, 64, 50, 97, 99, 57, 97, 54,
                 55, 52, 54, 97, 99, 97, 53, 52, 51,
                 97, 102, 56, 100, 102, 102, 51, 57,
                 56, 57, 52, 99, 102, 101, 56, 49, 55,
                 51, 97, 102, 98, 97, 50, 49, 101, 98,
                 48, 49, 99, 54, 102, 97, 101, 51, 51,
                 100, 53, 50, 57, 52, 55, 50, 50, 50, 56,
-            53, 53, 101, 102, 18, 1, 48, 26, 0}};
+                53, 53, 101, 102, 18, 1, 48, 26, 0}};
     private byte[] currentTransactionPull = new byte[0];
 
     public ClientHandler(Socket clientSocket, ClientRegistry clientRegistry) {
@@ -34,9 +33,8 @@ public class ClientHandler extends Thread {
             OutputStream out = clientSocket.getOutputStream();
             clientRegistry.registerClient(clientSocket);
             System.out.println("Client connected: " + clientSocket.getRemoteSocketAddress());
-            Thread.sleep(1000);
+            Thread.sleep(100);
             clientRegistry.sendBlockchain(currentBlockchain, out);
-//            clientRegistry.sendMessage(clientSocket, currentTransactionPull);
 
             while (!isInterrupted()) {
                 byte[] request;

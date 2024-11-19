@@ -1,7 +1,5 @@
 package SignalServer;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -35,11 +33,11 @@ public class ClientRegistry {
     public void sendBlockchain(byte[][] blockchain, OutputStream out) throws IOException {
         for (byte[] block : blockchain) {
             int blockLength = block.length;
-
             out.write(DataUtils.intToByteArray(blockLength));
             out.write(block);
             out.flush();
         }
+        System.out.println("Sended Blockchain");
     }
     public void broadcastBlockchain(Socket sender, byte[][] blockchain) {
         for (Socket socket : clients) {
