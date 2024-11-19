@@ -9,6 +9,6 @@ RUN chmod +x /app/gradlew
 
 RUN ./gradlew build
 
-EXPOSE 8000
+EXPOSE 5000
 
 CMD ["java", "-jar", "build/libs/SignalServer.jar"]
