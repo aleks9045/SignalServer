@@ -29,11 +29,11 @@ public class ClientHandler extends Thread {
             OutputStream out = clientSocket.getOutputStream();
             ClientRegistry.registerClient(clientSocket);
             System.out.println("Client connected: " + clientSocket.getRemoteSocketAddress());
-            Thread.sleep(100);
+
             clientSender.sendData(BlockchainRepository.getBlockchain(), 1, out);
-            System.out.println("Sent blockchain");
-            clientSender.sendData(TransactionPullRepository.getTransactionPull(), 2, out);
-            System.out.println("Sent transaction pull");
+            System.out.println("Sent blockchain to " + clientSocket.getRemoteSocketAddress());
+            clientSender.sendData(TransactionPullRepository.getTransactionPull(),  2, out);
+            System.out.println("Sent transaction pull to " + clientSocket.getRemoteSocketAddress());
 
             while (!isInterrupted()) {
                 int messageType = twoByteArrayToInt(in.readNBytes(2));
@@ -42,17 +42,15 @@ public class ClientHandler extends Thread {
                     continue;
                 }
                 byte[][] data = DataUtils.receiveDataBytes(in);
-
                 commandProcessor.process(messageType, data);
             }
         } catch (IOException e) {
             System.err.println("Error handling client " + clientSocket.getRemoteSocketAddress() + ": " + e.getMessage());
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         } finally {
             ClientRegistry.removeClient(clientSocket);
             try {
                 clientSocket.close();
+                System.out.println("Socket closed: " + clientSocket.getRemoteSocketAddress());
             } catch (IOException e) {
                 System.err.println("Error closing client socket: " + e.getMessage());
             }

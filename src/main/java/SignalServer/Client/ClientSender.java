@@ -18,13 +18,12 @@ public class ClientSender {
         }
     }
 
-    public void sendData(byte[][] data, int type, OutputStream out) throws IOException {
-        out.write(DataUtils.shortToByteArray((short) type));
+    public void sendData(byte[][] data, int dataType, OutputStream out) throws IOException {
+        out.write(DataUtils.shortToByteArray((short) dataType));
+
         out.write(DataUtils.intToByteArray(data.length));
         for (byte[] dataBlock : data) {
-            int blockLength = dataBlock.length;
-            System.out.println(dataBlock.length);
-            out.write(DataUtils.intToByteArray(blockLength));
+            out.write(DataUtils.intToByteArray(dataBlock.length));
             out.write(dataBlock);
             out.flush();
         }
@@ -44,7 +43,7 @@ public class ClientSender {
     }
 
     public void broadcastTransactionPull(Socket sender, byte[][] pull) {
-        for (Socket socket :  ClientRegistry.getClients()) {
+        for (Socket socket : ClientRegistry.getClients()) {
             if (socket != sender) {
                 try {
                     sendData(pull, 2, sender.getOutputStream());

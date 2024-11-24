@@ -2,6 +2,7 @@ package SignalServer;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 
 public class DataUtils {
     public static byte[][] receiveDataBytes(InputStream in) {
@@ -48,6 +49,9 @@ public class DataUtils {
     }
 
     public static int fourByteArrayToInt(byte[] bytes) {
+        if (bytes.length != 4) {
+            throw new NumberFormatException();
+        }
         return ((bytes[0] & 0xFF) << 24) |
                 ((bytes[1] & 0xFF) << 16) |
                 ((bytes[2] & 0xFF) << 8) |
@@ -55,6 +59,9 @@ public class DataUtils {
     }
 
     public static int twoByteArrayToInt(byte[] bytes) {
+        if (bytes.length != 2) {
+            throw new NumberFormatException();
+        }
         return ((bytes[0] & 0xFF) << 8) | (bytes[1] & 0xFF);
     }
 }
