@@ -6,6 +6,7 @@ import SignalServer.DataUtils;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class ClientSender {
 
@@ -33,6 +34,10 @@ public class ClientSender {
         for (Socket socket : ClientRegistry.getClients()) {
             if (socket != sender) {
                 try {
+                    System.out.println("Send blockchain: " + socket.getRemoteSocketAddress());
+                    for (byte[] block : blockchain) {
+                        System.out.println(Arrays.toString(block));
+                    }
                     sendData(blockchain, 1, sender.getOutputStream());
                 } catch (IOException e) {
                     System.err.println("Error sending blockchain: " + e.getMessage());
