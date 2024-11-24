@@ -20,10 +20,6 @@ public class ClientSender {
     }
 
     public void sendData(byte[][] data, int dataType, OutputStream out) throws IOException {
-        System.out.println("Send blockchain: ");
-        for (byte[] block : data) {
-            System.out.println(Arrays.toString(block));
-        }
         out.write(DataUtils.shortToByteArray((short) dataType));
 
         out.write(DataUtils.intToByteArray(data.length));
@@ -38,10 +34,6 @@ public class ClientSender {
         for (Socket socket : ClientRegistry.getClients()) {
             if (socket != sender) {
                 try {
-                    System.out.println("Send blockchain: " + socket.getRemoteSocketAddress());
-                    for (byte[] block : blockchain) {
-                        System.out.println(Arrays.toString(block));
-                    }
                     sendData(blockchain, 1, sender.getOutputStream());
                 } catch (IOException e) {
                     System.err.println("Error sending blockchain: " + e.getMessage());
