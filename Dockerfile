@@ -7,7 +7,7 @@ COPY . /app
 
 RUN chmod +x /app/gradlew
 
-RUN ./gradlew build
+RUN ./gradlew jar
 
 EXPOSE 5000
 
