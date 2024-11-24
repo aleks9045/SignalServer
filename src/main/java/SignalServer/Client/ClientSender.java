@@ -20,6 +20,10 @@ public class ClientSender {
     }
 
     public void sendData(byte[][] data, int dataType, OutputStream out) throws IOException {
+        System.out.println("Send blockchain: ");
+        for (byte[] block : data) {
+            System.out.println(Arrays.toString(block));
+        }
         out.write(DataUtils.shortToByteArray((short) dataType));
 
         out.write(DataUtils.intToByteArray(data.length));
