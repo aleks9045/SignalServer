@@ -6,13 +6,12 @@ import SignalServer.DataUtils;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.Arrays;
 
 public class ClientSender {
 
     public void sendError(OutputStream out) {
         try {
-            out.write(DataUtils.shortToByteArray((short) 0));
+            out.write((byte) 0);
             out.flush();
         } catch (IOException e) {
             System.err.println("Error sending message: " + e.getMessage());
@@ -20,7 +19,7 @@ public class ClientSender {
     }
 
     public void sendData(byte[][] data, int dataType, OutputStream out) throws IOException {
-        out.write(DataUtils.shortToByteArray((short) dataType));
+        out.write((byte) dataType);
 
         out.write(DataUtils.intToByteArray(data.length));
         for (byte[] dataBlock : data) {
