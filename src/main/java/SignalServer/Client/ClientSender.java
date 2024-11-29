@@ -33,7 +33,7 @@ public class ClientSender {
         for (Socket socket : ClientRegistry.getClients()) {
             if (socket != sender) {
                 try {
-                    sendData(blockchain, 1, sender.getOutputStream());
+                    sendData(blockchain, 1, socket.getOutputStream());
                 } catch (IOException e) {
                     System.err.println("Error sending blockchain: " + e.getMessage());
                 }
