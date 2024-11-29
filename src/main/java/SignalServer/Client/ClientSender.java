@@ -38,7 +38,7 @@ public class ClientSender {
         for (Socket socket : ClientRegistry.getClients()) {
             if (socket != sender) {
                 try {
-                    sendData(pull, 2, sender.getOutputStream());
+                    sendData(pull, 2, socket.getOutputStream());
                 } catch (IOException e) {
                     System.err.println("Error sending transaction pull: " + e.getMessage());
                 }
