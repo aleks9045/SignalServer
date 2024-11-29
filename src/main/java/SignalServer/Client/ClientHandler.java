@@ -69,7 +69,6 @@ public class ClientHandler extends Thread {
 
     public void sendError(OutputStream outputStream) {
         clientSender.sendError(outputStream);
-        System.out.println("Sent Error");
     }
 
     private class CommandProcessor {
