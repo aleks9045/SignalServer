@@ -9,15 +9,6 @@ import java.net.Socket;
 
 public class ClientSender {
 
-    public void sendError(OutputStream out) {
-        try {
-            System.out.println("eroreor");
-            out.write((byte) 0);
-            out.flush();
-        } catch (IOException e) {
-            System.err.println("Error sending message: " + e.getMessage());
-        }
-    }
 
     public void sendData(byte[][] data, int dataType, OutputStream out) throws IOException {
         out.write((byte) dataType);

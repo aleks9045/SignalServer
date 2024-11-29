@@ -38,8 +38,7 @@ public class ClientHandler extends Thread {
             while (!isInterrupted()) {
                 int dataType = in.read();
                 if (commands.get(dataType) == null) {
-                    sendError(out);
-                    continue;
+                    Thread.currentThread().interrupt();
                 }
                 byte[][] data = DataUtils.receiveDataBytes(in);
                 commandProcessor.process(dataType, data);
@@ -67,9 +66,6 @@ public class ClientHandler extends Thread {
         clientSender.broadcastTransactionPull(clientSocket, pull);
     }
 
-    public void sendError(OutputStream outputStream) {
-        clientSender.sendError(outputStream);
-    }
 
     private class CommandProcessor {
         public CommandProcessor() {
