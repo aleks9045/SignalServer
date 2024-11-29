@@ -36,7 +36,7 @@ public class ClientHandler extends Thread {
             System.out.println("Sent transaction pull to " + clientSocket.getRemoteSocketAddress());
 
             while (!isInterrupted()) {
-                int messageType = twoByteArrayToInt(in.readNBytes(2));
+                int messageType = in.read();
                 if (commands.get(messageType) == null) {
                     sendError(out);
                     continue;
