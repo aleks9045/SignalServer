@@ -36,13 +36,13 @@ public class ClientHandler extends Thread {
             System.out.println("Sent transaction pull to " + clientSocket.getRemoteSocketAddress());
 
             while (!isInterrupted()) {
-                int messageType = in.read();
-                if (commands.get(messageType) == null) {
+                int dataType = in.read();
+                if (commands.get(dataType) == null) {
                     sendError(out);
                     continue;
                 }
                 byte[][] data = DataUtils.receiveDataBytes(in);
-                commandProcessor.process(messageType, data);
+                commandProcessor.process(dataType, data);
             }
         } catch (IOException e) {
             System.err.println("Error handling client " + clientSocket.getRemoteSocketAddress() + ": " + e.getMessage());

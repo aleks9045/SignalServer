@@ -11,6 +11,7 @@ public class ClientSender {
 
     public void sendError(OutputStream out) {
         try {
+            System.out.println("eroreor");
             out.write((byte) 0);
             out.flush();
         } catch (IOException e) {
