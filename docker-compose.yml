@@ -1,6 +1,5 @@
 services:
   signal-server:
     build: .
-    container_name: signal-server
     ports:
       - "5000:5000"

@@ -1,4 +1,4 @@
-import SignalServer.Server;
+import signalServer.Server;
 
 public class Main {
     public static void main(String[] args) {

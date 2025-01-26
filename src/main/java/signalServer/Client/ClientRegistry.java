@@ -1,11 +1,11 @@
-package SignalServer.Client;
+package signalServer.Client;
 
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClientRegistry {
-    private static volatile List<Socket> clients = new ArrayList<>();
+    private static final List<Socket> clients = new ArrayList<>();
 
     public static synchronized List<Socket> getClients() {
         return clients;

@@ -1,7 +1,7 @@
-package SignalServer.Repository;
+package signalServer.Repository;
 
 public class BlockchainRepository {
-    private static volatile byte[][] blockchain = new byte[][]{{
+    private static volatile byte[][] blockchain = new byte[][] {{
             10, 64, 50, 97, 99, 57, 97, 54,
             55, 52, 54, 97, 99, 97, 53, 52, 51,
             97, 102, 56, 100, 102, 102, 51, 57,

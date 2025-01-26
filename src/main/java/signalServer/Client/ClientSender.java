@@ -1,7 +1,7 @@
-package SignalServer.Client;
+package signalServer.Client;
 
 
-import SignalServer.DataUtils;
+import signalServer.DataUtils;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -10,7 +10,7 @@ import java.net.Socket;
 public class ClientSender {
 
 
-    public void sendData(byte[][] data, int dataType, OutputStream out) throws IOException {
+    public static void sendData(byte[][] data, int dataType, OutputStream out) throws IOException {
         out.write((byte) dataType);
 
         out.write(DataUtils.intToByteArray(data.length));
@@ -21,7 +21,7 @@ public class ClientSender {
         }
     }
 
-    public void broadcastBlockchain(Socket sender, byte[][] blockchain) {
+    public static void broadcastBlockchain(Socket sender, byte[][] blockchain) {
         for (Socket socket : ClientRegistry.getClients()) {
             if (socket != sender) {
                 try {
@@ -34,7 +34,7 @@ public class ClientSender {
         System.out.println("Broadcast blockchain");
     }
 
-    public void broadcastTransactionPull(Socket sender, byte[][] pull) {
+    public static void broadcastTransactionPull(Socket sender, byte[][] pull) {
         for (Socket socket : ClientRegistry.getClients()) {
             if (socket != sender) {
                 try {

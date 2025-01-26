@@ -1,7 +1,6 @@
-package SignalServer;
+package signalServer;
 
-import SignalServer.Client.ClientHandler;
-import SignalServer.Client.ClientSender;
+import signalServer.Client.ClientHandler;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -9,7 +8,6 @@ import java.net.Socket;
 
 public class Server {
     private final int port;
-    private final ClientSender clientSender = new ClientSender();
 
 
     public Server(int port) {
@@ -21,7 +19,7 @@ public class Server {
             System.out.println("Signaling server started on port " + port);
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                ClientHandler clientHandler = new ClientHandler(clientSocket, clientSender);
+                ClientHandler clientHandler = new ClientHandler(clientSocket);
                 clientHandler.start();
             }
         } catch (IOException e) {

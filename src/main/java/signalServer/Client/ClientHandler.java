@@ -1,25 +1,21 @@
-package SignalServer.Client;
+package signalServer.Client;
 
-import SignalServer.DataUtils;
-import SignalServer.Repository.BlockchainRepository;
-import SignalServer.Repository.TransactionPullRepository;
+import signalServer.DataUtils;
+import signalServer.Repository.BlockchainRepository;
+import signalServer.Repository.TransactionPullRepository;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.function.Consumer;
 
-import static SignalServer.DataUtils.twoByteArrayToInt;
-
 public class ClientHandler extends Thread {
     private final Socket clientSocket;
-    private final ClientSender clientSender;
     private final HashMap<Integer, Consumer<byte[][]>> commands = new HashMap<>();
     CommandProcessor commandProcessor = new CommandProcessor();
 
-    public ClientHandler(Socket clientSocket, ClientSender clientSender) {
+    public ClientHandler(Socket clientSocket) {
         this.clientSocket = clientSocket;
-        this.clientSender = clientSender;
     }
 
     @Override
@@ -30,9 +26,9 @@ public class ClientHandler extends Thread {
             ClientRegistry.registerClient(clientSocket);
             System.out.println("Client connected: " + clientSocket.getRemoteSocketAddress());
 
-            clientSender.sendData(BlockchainRepository.getBlockchain(), 1, out);
+            ClientSender.sendData(BlockchainRepository.getBlockchain(), 1, out);
             System.out.println("Sent blockchain to " + clientSocket.getRemoteSocketAddress());
-            clientSender.sendData(TransactionPullRepository.getTransactionPull(),  2, out);
+            ClientSender.sendData(TransactionPullRepository.getTransactionPull(),  2, out);
             System.out.println("Sent transaction pull to " + clientSocket.getRemoteSocketAddress());
 
             while (!isInterrupted()) {
@@ -58,12 +54,12 @@ public class ClientHandler extends Thread {
 
     public void broadcastBlockchain(byte[][] blockchain) {
         BlockchainRepository.setBlockchain(blockchain);
-        clientSender.broadcastBlockchain(clientSocket, blockchain);
+        ClientSender.broadcastBlockchain(clientSocket, blockchain);
     }
 
     public void broadcastTransactionPull(byte[][] pull) {
         TransactionPullRepository.setTransactionPull(pull);
-        clientSender.broadcastTransactionPull(clientSocket, pull);
+        ClientSender.broadcastTransactionPull(clientSocket, pull);
     }
 
 

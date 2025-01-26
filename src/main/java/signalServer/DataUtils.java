@@ -1,4 +1,4 @@
-package SignalServer;
+package signalServer;
 
 import java.io.IOException;
 import java.io.InputStream;
